@@ -15,7 +15,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSignalR();
+//builder.Services.AddSignalR();
+
+var connectionAzureSignalR = "Endpoint=https://dotnetsignalr.service.signalr.net;AccessKey=abo4HMnbak36Fg+z5Ev+dw4RmQGPhFlyPVUoxzUIDtU=;Version=1.0;";
+
+builder.Services.AddSignalR().AddAzureSignalR(connectionAzureSignalR);
 
 var app = builder.Build();
 
@@ -47,5 +51,6 @@ app.MapHub<DeathlyHallowsHub>("hubs/deathyhallows");
 app.MapHub<HouseGroupHub>("/hubs/houseGroup");
 app.MapHub<NotificationHub>("/hubs/notification");
 app.MapHub<ChatHub>("/hubs/chat");
+app.MapHub<OrderHub>("/hubs/order");
 
 app.Run();
